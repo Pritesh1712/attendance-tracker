@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Student Attendance Tracker</title>
+  <link rel="stylesheet" href="style.css"/>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header class="header">
+    <div class="header-left">
+      <span class="logo">📋</span>
+      <div>
+        <div class="app-title">Attendance Tracker</div>
+        <div class="app-sub">AWS EC2 · Node.js + Express</div>
+      </div>
+    </div>
+    <div class="header-right">
+      <div class="date-wrap">
+        <label>Date</label>
+        <input type="date" id="dateInput" class="date-input"/>
+      </div>
+      <div class="server-status">
+        <span class="dot" id="dot"></span>
+        <span id="statusText">Connecting…</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- TABS -->
+  <div class="tabs">
+    <button class="tab active" data-tab="attendance">Mark Attendance</button>
+    <button class="tab" data-tab="students">Manage Students</button>
+    <button class="tab" data-tab="report">Report</button>
+  </div>
+
+  <!-- ── TAB: MARK ATTENDANCE ── -->
+  <div class="tab-content active" id="tab-attendance">
+    <div class="card">
+      <div class="card-header">
+        <h2>Mark Attendance</h2>
+        <div class="header-actions">
+          <button class="btn-sm btn-green" id="markAllPresent">✓ All Present</button>
+          <button class="btn-sm btn-red"   id="markAllAbsent">✗ All Absent</button>
+          <button class="btn-sm btn-blue"  id="saveAttendance">💾 Save</button>
+        </div>
+      </div>
+
+      <div id="attendanceList" class="student-table-wrap">
+        <p class="empty">Loading students…</p>
+      </div>
+    </div>
+
+    <!-- Summary bar -->
+    <div class="summary-bar">
+      <div class="summary-item green"><span id="presentCount">0</span> Present</div>
+      <div class="summary-item red"><span id="absentCount">0</span> Absent</div>
+      <div class="summary-item grey"><span id="unmarkedCount">0</span> Unmarked</div>
+    </div>
+  </div>
+
+  <!-- ── TAB: MANAGE STUDENTS ── -->
+  <div class="tab-content" id="tab-students">
+    <div class="card">
+      <div class="card-header">
+        <h2>Students</h2>
+        <button class="btn-sm btn-blue" id="openAddStudent">+ Add Student</button>
+      </div>
+
+      <div id="studentList" class="student-table-wrap">
+        <p class="empty">Loading…</p>
+      </div>
+    </div>
+
+    <!-- Add student form (inline) -->
+    <div class="add-form" id="addStudentForm" style="display:none">
+      <h3>Add New Student</h3>
+      <div class="form-row">
+        <input type="text" id="newName"   placeholder="Full Name"  class="form-input"/>
+        <input type="text" id="newRoll"   placeholder="Roll No"    class="form-input"/>
+        <button class="btn-sm btn-blue" id="saveStudent">Add</button>
+        <button class="btn-sm btn-grey"  id="cancelAdd">Cancel</button>
+      </div>
+      <p class="form-error" id="formError"></p>
+    </div>
+  </div>
+
+  <!-- ── TAB: REPORT ── -->
+  <div class="tab-content" id="tab-report">
+    <div class="card">
+      <div class="card-header">
+        <h2>Attendance Report</h2>
+        <select id="reportStudent" class="form-select">
+          <option value="">— Select Student —</option>
+        </select>
+      </div>
+      <div id="reportContent" class="report-empty">Select a student to see their report.</div>
+    </div>
+  </div>
+
+  <!-- TOAST -->
+  <div class="toast" id="toast"></div>
+
+  <script src="app.js"></script>
+</body>
+</html>
